@@ -14,7 +14,7 @@ figure(1);
 plot.plotMT('mesh', mesh, 'section', 'subdomains');
 
 %%
-periods = logspace(0, 4, 21);
+periods = logspace(0, 4, 41);
 freq = 1 ./ periods;
 omega = 2 * pi * freq;
 mu0 = pi * 4e-7;
@@ -75,4 +75,4 @@ end
 %%
 plot.plotMT('fem', fem, 'sol', solution, ...
     'sounding', 'rhoa+phase', ...
-    'station', 10, 'periods', periods);
+    'station', 11, 'periods', periods);
