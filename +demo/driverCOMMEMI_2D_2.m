@@ -9,10 +9,8 @@ mesh = mesh.getMesh('filename', meshFile, 'format', 'triangle', ...
     'shift', 0, 'scale', 1, 'verbose', true);
 
 %%
-plot.plotSubdomains(mesh, 'meshcolor', 'none');
-xlabel('y in m');
-ylabel('z in m');
-axis equal tight ij
+figure(1);
+plot.plotMT('mesh', mesh, 'section', 'subdomains');
 
 %%
 freq = tools.pick(1, 1 / 10, 1 / 1000);
@@ -39,15 +37,8 @@ fem = fe.FEMproblem('mesh', mesh, ...
     'verbose', true);
 
 %%
-figure(1);
-plot.patchplotConst(fem.mesh.node, ...
-    [fem.mesh.tri2node; tools.asRow(fem.sigma)], @log10, [0.9 0.9 0.9]);
-xlabel('y in m');
-ylabel('z in m');
-colormap(gca, jet(256));
-h = colorbar();
-axis equal tight ij
-ylabel(h, 'log_{10}(\sigma/({S/m}))');
+figure(2);
+plot.plotMT('fem', fem, 'section', 'conductivity');
 
 %%
 fem = fe.getQ(fem, obs);
@@ -60,53 +51,21 @@ fem = fe.removeDirichlet(fem, 'sigmaBCL', sigmaBCL, 'sigmaBCR', sigmaBCR, ...
 
 sol = fe.FEMsolve(fem, 'verbose', true);
 
-iw = -2i * pi * freq;
-Ex = fem.Q.Qe   * sol.ue;
-Ey = fem.Q.QhEy * sol.uh;
-Ez = fem.Q.QhEz * sol.uh;
-Hx = fem.Q.Qh   * sol.uh;
-Hy = fem.Q.QeHy * sol.ue / iw;
-Hz = fem.Q.QeHz * sol.ue / iw;
-
-T = Hz ./ Hy;
-
-Zxy = Ex ./ Hy;
-rhoaxy = abs(Zxy).^2 / mu0 / omega;
-phixy = atan(imag(Zxy) ./ real(Zxy)) * 180 / pi;
-
-Zyx = Ey ./ Hx;
-rhoayx = abs(Zyx).^2 / mu0 / omega;
-phiyx = atan(imag(Zyx) ./ real(Zyx)) * 180 / pi;
-
-%%
-figure(2);
-subplot(2, 1, 1);
-semilogy(xobs, rhoaxy, '.-', xobs, rhoayx, '.-');
-ylim([1 1000]);
-grid();
-xlabel('y in km');
-legend('E-pol', 'H-Pol');
-subplot(2, 1, 2);
-plot(xobs, phixy, '.-', xobs, phiyx, '.-');
-ylim([0 90]);
-grid();
-xlabel('y in km');
-legend('E-pol', 'H-Pol');
+sol = mt.postProcessing(fem, sol);
 
 %%
 figure(3);
-plot.patchplotConst(fem.mesh.node, ...
-    [fem.elem2dofs(1:3, :); tools.asRow(abs(fem.Q.QJefull * sol.ue))], ...
-    @(x) x, 'w');
-colormap(gca, jet(256));
-h = colorbar();
-ylabel(h, '|J| in A/m^2');
-axis equal tight ij
+plot.plotMT('fem', fem, 'sol', sol, 'obs', obs, 'profile', 'rhoa+phase');
 
 %%
 figure(4);
-plot(xobs, real(T), 'r--', xobs, imag(T), 'b--');
-grid();
-xlabel('y in km');
-ylabel('magn. transfer function');
-legend('Re', 'Im');
+plot.plotMT('fem', fem, 'sol', sol, 'section', 'Jx');
+
+%%
+figure(5);
+plot.plotMT('fem', fem, 'sol', sol, 'obs', obs, 'profile', 'tipper');
+
+%%
+figure(6);
+plot.plotMT('fem', fem, 'sol', sol, 'sounding', 'rhoa+phase', ...
+    'station', 9);

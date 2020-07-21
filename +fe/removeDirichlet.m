@@ -53,6 +53,7 @@ assert(length(sigmaBCR) == 1 + length(thicknessBCR), ...
 
 
 iw = 2i * pi * freq;
+fem.app.frequency = freq;
 
 fem.uDir = zeros(fem.ndofs, 1);
 
