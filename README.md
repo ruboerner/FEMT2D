@@ -14,6 +14,7 @@ To make the creation of 2-D triangular meshes more user-friendly, the installati
 `FEMT2D` has been tested with MATLAB R2020a. Earlier releases work well also. 
 
 #### References
+* FEMT2D: FE simulation of 2D Magnetotellurics in MATLAB. https://doi.org/10.5281/zenodo.3955407
 * Jonathan Richard Shewchuk, _Triangle: Engineering a 2D Quality Mesh Generator and Delaunay Triangulator_, in "Applied Computational Geometry: Towards Geometric Engineering" (Ming C. Lin and Dinesh Manocha, editors), volume 1148 of Lecture Notes in Computer Science, pages 203-222, Springer-Verlag, Berlin, May 1996.
 * Jonathan Richard Shewchuk, _Delaunay Refinement Algorithms for Triangular Mesh Generation_, Computational Geometry: Theory and Applications 22(1-3):21-74, May 2002.
 * Franke, A., Börner, R. U., & Spitzer, K. (2007). *Adaptive unstructured grid finite element simulation of two-dimensional magnetotelluric fields for arbitrary surface and seafloor topography*. Geophysical Journal International, 171(1), 71-86.
