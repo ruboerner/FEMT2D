@@ -1,3 +1,5 @@
+[![DOI](https://zenodo.org/badge/276864022.svg)](https://zenodo.org/badge/latestdoi/276864022)
+
 # FEMT2D
 
 This repository contains the MATLAB toolbox `FEMT2D`.
