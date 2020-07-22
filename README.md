@@ -13,6 +13,8 @@ To make the creation of 2-D triangular meshes more user-friendly, the installati
 
 `FEMT2D` has been tested with MATLAB R2020a. Earlier releases work well also. 
 
+To activate rendering of $\LaTeX$ expressions, download and activate this [Chrome extension](https://chrome.google.com/webstore/detail/mathjax-plugin-for-github/ioemnmodlmafdkllaclgeombjnmnbima).
+
 #### References
 * FEMT2D: FE simulation of 2D Magnetotellurics in MATLAB. https://doi.org/10.5281/zenodo.3955407
 * Jonathan Richard Shewchuk, _Triangle: Engineering a 2D Quality Mesh Generator and Delaunay Triangulator_, in "Applied Computational Geometry: Towards Geometric Engineering" (Ming C. Lin and Dinesh Manocha, editors), volume 1148 of Lecture Notes in Computer Science, pages 203-222, Springer-Verlag, Berlin, May 1996.
