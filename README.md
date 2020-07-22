@@ -13,7 +13,7 @@ To make the creation of 2-D triangular meshes more user-friendly, the installati
 
 `FEMT2D` has been tested with MATLAB R2020a. Earlier releases work well also. 
 
-To activate rendering of $\LaTeX$ expressions, download and activate this [Chrome extension](https://chrome.google.com/webstore/detail/mathjax-plugin-for-github/ioemnmodlmafdkllaclgeombjnmnbima).
+To activate rendering of $\LaTeX$ expressions within this `README.md`, download and activate this [Chrome extension](https://chrome.google.com/webstore/detail/mathjax-plugin-for-github/ioemnmodlmafdkllaclgeombjnmnbima).
 
 #### References
 * FEMT2D: FE simulation of 2D Magnetotellurics in MATLAB. https://doi.org/10.5281/zenodo.3955407
