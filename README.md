@@ -37,7 +37,7 @@ For a quick demonstration, simply call
 >> demo.driverWeaver
 ```
 which loads a triangular mesh, and evaluates the response of two quarter-spaces for a given period at predefined observation points.
-A few typical plots, such as profiles of apparent resistivities, phases, and magnetictransfer functions will be generated. 
+A few typical plots, such as profiles of apparent resistivities, phases, and magnetic transfer functions will be generated. 
 
 ## Folder structure
 
@@ -63,7 +63,7 @@ The folder `Notebooks` contains example _Jupyter Notebooks_ which introduce the 
 
 Each of these Notebooks creates a particular set of files in the folder `meshes`. The meshes can later be read by routines which reside in the `+mesh` folder.
 
-## Description of the toolbox
+## Details of the toolbox
 After reading in a _Triangle_ triangulation file, the mesh topology is stored within a MATLAB `struct`.
 
 ```matlab
@@ -115,7 +115,6 @@ fem = fe.FEMproblem('mesh', mesh, ...
     'elementtype', 'Lagrange', ...
     'order', 2, 'dimension', 2, ...
     'sigma', sigma, 'mu', mu, ...
-    'application', 'MT', ...
     'polarization', 'both', ...
     'frequency', freq, ...
     'verbose', true);
@@ -123,7 +122,8 @@ fem = fe.FEMproblem('mesh', mesh, ...
 
 As one can conclude from the above example, the mesh consists of five subdomains each of which is associated with a unique parameter (here `sigma` denotes the electrical conductivity $\sigma$ given in S/m and `mu` is the relative magnetic permeability $\mu_r$, such that $\mu = \mu_r \mu_0$ with $\mu_0 = 4 \pi \cdot10^{-7}$ Vs/Am).
 
-In the example given above, the solutions of the Helmholtz equations (for both magnetotelluric polarizations) are desired at a frequency `freq` of 0.01 Hz. The polynomial order `order` of the Lagrange elements is 2, i.e, we use quadratic basis functions.
+In the given example, the solutions of the Helmholtz equations (for both magnetotelluric polarizations) are desired at a frequency `freq` of 0.01 Hz. The polynomial order `order` of the Lagrange elements is 2, i.e., we use quadratic (second order) finite element basis functions.
+The numerical accuracy is always much better when second-order elements are employed.
 
 After calling `FEMproblem`, the `fem` structure contains the following fields:
 
@@ -132,7 +132,6 @@ After calling `FEMproblem`, the `fem` structure contains the following fields:
 | `mesh`     | struct    | copy of `mesh` struct | - |
 | `order`    | scalar    | 1 or 2 for linear or quadratic elements, resp. | 1 |
 | `dimension` | scalar | spatial dimension (currently only 2D is implemented) | 2 |
-| `application` | string | `'MT'`, `'TEM'` or `'DC'` | `'MT'` |
 | `app`      | struct | contains application (PDE) specific parameters, e.g., the frequency `frequency` for the MT case | - |
 | `polarization` | string | indicates whether E- (`'epol'`), H- (`'hpol'`) or both (`'both'`) polarizations are desired | `'both'` |
 | `elementtype` | type of finite elements | `'Lagrange'` |
@@ -150,7 +149,7 @@ After calling `FEMproblem`, the `fem` structure contains the following fields:
 | `EnR`    | scalar | electric field at $z=0$ for the right boundary | - |
 | `HnL`    | scalar | magnetic field at $z=0$ for the left boundary | - |
 | `HnR`    | scalar | magnetic field at $z=0$ for the right boundary | - |
-|
+
 
 
 
@@ -168,7 +167,7 @@ After return, the `fem` struct contains the following additional fields:
 | `Me`  | `ndofs x ndofs` | E-pol mass matrix (sparse) |
 | `Kh`  | `ndofs x ndofs` | H-pol stiffness matrix (sparse) |
 | `Mh`  | `ndofs x ndofs` | H-pol mass matrix (sparse) |
-|
+
 
 ### The observation operators
 
