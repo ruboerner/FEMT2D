@@ -65,8 +65,3 @@ plot.plotMT('fem', fem, 'sol', sol, 'section', 'Jx');
 %%
 figure(5);
 plot.plotMT('fem', fem, 'sol', sol, 'obs', obs, 'profile', 'tipper');
-
-%%
-figure(6);
-plot.plotMT('fem', fem, 'sol', sol, 'sounding', 'rhoa+phase', ...
-    'station', 9);
