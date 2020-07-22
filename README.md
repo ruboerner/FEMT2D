@@ -1,6 +1,6 @@
-# FEtoolbox
+# FEMT2D
 
-This repository contains the MATLAB toolbox `FEtoolbox`.
+This repository contains the MATLAB toolbox `FEMT2D`.
 
 It provides a discretization of Helmholtz type PDE's in two dimensions using first or second order Lagrange elements on triangular meshes.
 
@@ -9,28 +9,41 @@ Besides a basic MATLAB installation, a mesh generator is required for setting up
 
 To make the creation of 2-D triangular meshes more user-friendly, the installation of [PyGIMLi](http://www.pygimli.org) is strongly recommended.
 
-`FEtoolbox` has been tested with MATLAB R2020a. Earlier releases work well also. 
+`FEMT2D` has been tested with MATLAB R2020a. Earlier releases work well also. 
 
 #### References
 * Jonathan Richard Shewchuk, _Triangle: Engineering a 2D Quality Mesh Generator and Delaunay Triangulator_, in "Applied Computational Geometry: Towards Geometric Engineering" (Ming C. Lin and Dinesh Manocha, editors), volume 1148 of Lecture Notes in Computer Science, pages 203-222, Springer-Verlag, Berlin, May 1996.
 * Jonathan Richard Shewchuk, _Delaunay Refinement Algorithms for Triangular Mesh Generation_, Computational Geometry: Theory and Applications 22(1-3):21-74, May 2002.
+* Franke, A., Börner, R. U., & Spitzer, K. (2007). *Adaptive unstructured grid finite element simulation of two-dimensional magnetotelluric fields for arbitrary surface and seafloor topography*. Geophysical Journal International, 171(1), 71-86.
+* Börner, R. U. (2010). Numerical modelling in geo-electromagnetics: advances and challenges. Surveys in Geophysics, 31(2), 225-245.
+* Rücker, C., Günther, T., Wagner, F.M., 2017. pyGIMLi: An open-source library for modelling and inversion in geophysics, Computers and Geosciences, 109, 106-123, doi: 10.1016/j.cageo.2017.07.011.
+
 
 ## Installation
 Clone this repository.
 ```bash
-git clone https://github.com/ruboerner/FEtoolbox.git
+git clone https://github.com/ruboerner/FEMT2D.git
 ```
 
-Then enter the newly created folder `FEtoolbox`:
+Then enter the newly created folder `FEMT2D`:
 ```bash
-cd FEtoolbox
+cd FEMT2D
 ```
+
+## Quick start
+
+For a quick demonstration, simply call
+```matlab
+>> demo.driverWeaver
+```
+which loads a triangular mesh, and evaluates the response of two quarter-spaces for a given period at predefined observation points.
+A few typical plots, such as profiles of apparent resistivities, phases, and magnetictransfer functions will be generated. 
 
 ## Folder structure
 
-Inside the `FEtoolbox` folder, there are a few subfolders. The folders with leading `+`, e.g., `+fe`, contain _packages_ and have their own namespace.
+Inside the `FEMT2D` folder, there are a few subfolders. The folders with leading `+`, e.g., `+fe`, contain _packages_ and have their own namespace.
 ```
-FEtoolbox
+FEMT2D
 ├── +demo
 ├── +fe
 ├── +mesh
@@ -40,7 +53,7 @@ FEtoolbox
 ├── Notebooks
 ├── meshes
 ```
-From the top-level folder `FEtoolbox` you can start a demonstration by typing, e.g.,
+From the top-level folder `FEMT2D` you can start a demonstration by typing, e.g.,
 ```matlab
 demo.driverCOMMEMI_2D_0
 ```
@@ -221,7 +234,7 @@ If a simple 1-D background with identical layers at the left and the right model
 fem = fe.removeDirichlet(fem, 'sigmaBC', [1e-2, 1e-3], 'thicknessBC', 2e4, freq);
 ```
 
-Although arbitrary topography can be modelled in the computational domain, the Earth's surface at both boundaries is restricted to be at $z=0$ m. This feature will be included in a future release of the `FEtoolbox`.
+Although arbitrary topography can be modelled in the computational domain, the Earth's surface at both boundaries is restricted to be at $z=0$ m. This feature will be included in a future release of the `FEMT2D`.
 
 ### Solution of the system
 
@@ -233,9 +246,9 @@ Depending on the desired polarization, the MATLAB structure `sol` contains the d
 
 Note that the actual values at the desired points of interest have to be interpolated using the afformentioned `Q` operators.
 
-To obtain all possible field components for both polarizations at the positions defined by `obs` and one frequency `freq`, one would call
+To obtain all possible field components for both polarizations at the positions defined by `obs` and one frequency `fem.app.frequency`, one would call 
 ```matlab
-iw = -2i * pi * freq
+iw = -2i * pi * fem.app.frequency
 Ex = fem.Q.Qe   * sol.ue;
 Ey = fem.Q.QhEy * sol.uh;
 Ez = fem.Q.QhEz * sol.uh;
@@ -245,7 +258,7 @@ Hz = fem.Q.QeHz * sol.ue / iw;
 ``` 
 The last two statements originate from the componentwise evaluation of Maxwell's curl equation 
 $$\nabla \times \mathbf E = -i\omega\mu \mathbf H.$$
-Note that `FEtoolbox` is able to incorporate inhomogenous magnetic permeabilities, which are taken into account in the forming of `fem.Q.QeHy` and `fem.Q.QeHz` when calling `getQ`.
+Note that `FEMT2D` is able to incorporate inhomogenous magnetic permeabilities, which are taken into account in the forming of `fem.Q.QeHy` and `fem.Q.QeHz` when calling `getQ`.
 
 ### Visualization of the results
 
@@ -271,3 +284,20 @@ To transform this quantity, e.g., by using its common logarithm, we apply a func
 The last argument controls the color of the triangular mesh. Colors can be defined either as normalized RGB values, e.g., `[0.1, 0.1, 0.1]` or as color abbreviation, e.g., `'w'` for _white_. The mesh can be suppressed by using `'none'` as mesh color.
 
 The triangular elements are colored according to the color table set by a call to, e.g., `colormap(gca, jet(256))`.
+
+All plot routines have been called by the top level function `plot.plotMT()` which accepts the following parameters:
+
+| Parameter    | Value | Purpose |
+|:-------------|:-------|:-------|
+|`fem` | fem struct    | |
+|`sol` | sol struct with results of `FEMsolve` | |
+|`mesh` | mesh struct |
+|`obs`| `2 x np` array with `np` observation points | |
+|`periods`| `nf` array of periods | required for sounding curve plots |
+|`profile`| `rhoa+phase`, `tipper`| plot for a single frequency along profile defined by `obs` |
+|`sounding` | `rhoa+phase` | sounding curves at a particular station given by its number `site` |
+|`section`  | `Jx` | depth section of a given field component, here $\|J_x\|$ |
+|`section`  | `conductivity` | depth section of conductivities |
+|`section`  | `subdomain` | depth section of subdomain number which correspond to entries of the `sigma` and `mu` arrays  required in the call to `FEMproblem`|
+
+More plot types will be added to `+plot/plotMT.m` in the future.
