@@ -136,10 +136,3 @@ if strcmp(fem.application, 'MT')
         fem.fch = fem.NullStrip' * (fem.uDirh - (fem.Kh + iw * fem.Mh) * fem.uDirh);
     end
 end
-
-% fc = fem.Null' * (uDir - (K + iw * M) * uDir);
-
-% ud = fem.Compl * (fem.Compl' * b);
-% Ac = fem.Null' * A * fem.Null;
-% fc = fem.Null' * (b - A * ud);
-
