@@ -1,6 +1,32 @@
 function fem = FEMproblem(varargin)
-%FEMproblem provides FEM structure for a given FE type and application
+%FEMproblem provides struct fem
 %
+% fem = FEMproblem() computes all FE related quantities necessary for the
+% solution of the 2D MT problem.
+%
+% Input:
+% ======
+%
+% FEMproblem() accepts the following keyword-value
+% pairs:
+%
+% | 'mesh'         | mesh struct from call to getMesh()
+% | 'order'        | FE order 1 or 2 ((linear or quadratic)
+% | 'polarization' | 'epol', 'hpol', or 'both'
+% | 'sigma'        | array of conductivities given in the order of
+% |                | subdomains
+% | 'mu'           | likewise for *relative* magnetic permeability
+% | 'frequency'    | frequency in Hz, scalar
+% | 'verbose'      | if true, FEMproblem() provides more information during execution
+%
+% Output:
+% =======
+%
+% FEMproblem() returns the MATLAB struct fem that holds all information necessary for later assembly
+% of FE matrices etc.
+%
+% (C) 2020 Ralph-Uwe Börner
+
 
 p = inputParser;
 

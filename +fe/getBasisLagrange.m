@@ -1,5 +1,15 @@
 function [Phi, GradPhi] = getBasisLagrange(x, y, order, dim)
-%function [Phi, gradPhi] = getBasisLagrange(x, y, order, dim)
+%getBasisLagrange Compute finite element basis and its gradient for first
+%and second order Lagrange (H1) finite elements at point (x,y)
+%
+% [Phi, gradPhi] = getBasisLagrange(x, y, order, dim)
+%
+% getBasisLagrange computes the Lagrange basis and its gradient
+% within a triangular reference element connecting the points
+% (0,0), (1,0), and (0,1).
+%
+% (C) 2020 Ralph-Uwe Börner
+%
 
 if nargin < 4
     dim = 2;

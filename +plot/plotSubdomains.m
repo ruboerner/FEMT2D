@@ -1,5 +1,7 @@
 function plotSubdomains(mesh, varargin)
 %plotSubdomains(mesh)
+%
+% (C) 2020 Ralph-Uwe Börner
 
 p = inputParser;
 

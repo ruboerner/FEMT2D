@@ -1,4 +1,6 @@
 function sol = getImpedance(sol)
+%getImpedance Compute impedance from electric and magnetic fields
+%
 
 if sol.epol
     assert(isfield(sol, 'Ex') && isfield(sol, 'Hy'));

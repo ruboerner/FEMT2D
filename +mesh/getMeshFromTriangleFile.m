@@ -4,6 +4,8 @@ function msh = getMeshFromTriangleFile(filename, scale, shift)
 %
 % mesh = getMeshFromTriangleFile(filename, scale, shift)
 %
+% (C) 2020 Ralph-Uwe Börner
+%
 
 if nargin < 3
     shift = 0;
@@ -12,7 +14,6 @@ end
 if nargin < 2
     scale = 1;
 end
-    
 
 [msh.node, msh.tri2node, msh.tri2subdomain, msh.marker] = mesh.getTablesFromTriangle(filename);
 msh.node = msh.node * scale;

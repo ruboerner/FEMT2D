@@ -1,5 +1,22 @@
 function mesh = completeMesh(mesh)
-
+%completeMesh calculates missing quantities from a triangular mesh
+%
+% completeMesh computes point and edge tables as well as affine maps
+% from the information stored in the mesh struct as provided by, e.g.,
+% mesh generators like Triangle.
+%
+% Input:
+% =====
+% A triangular mesh consisting of a triangle-to-node map stored in the
+% struct mesh
+%
+% Output:
+% =======
+%
+% completeMesh augments the struct mesh.
+%
+% (C) in its original form by Martin Afanasjew
+%
 
 % The following array associates the three edges of a triangle with the
 % three local vertex indices (see description above).

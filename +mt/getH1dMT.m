@@ -1,4 +1,6 @@
 function H = getH1dMT(f,rho,d,zi)
+%getH1dMT magnetic field within and above a layered halfspace
+%
 % H = getH1DMT(F,RHO,D,Z)
 %
 % Compute horizontal magnetic field H within and above a layered half-space.

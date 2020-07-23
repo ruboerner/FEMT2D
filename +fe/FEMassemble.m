@@ -1,4 +1,10 @@
 function fem = FEMassemble(fem, varargin)
+%FEMassemble Assemble mass and stiffness matrices.
+%
+% FEMassemble() constructs the finite element matrices M and K for both MT
+% polarizations and stores them in the struct fem.
+%
+% (C) Ralph-Uwe Börner
 
 p = inputParser;
 addParameter(p, 'output', 'matrices', @ischar);

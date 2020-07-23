@@ -1,5 +1,27 @@
 function sol = FEMsolve(fem, varargin)
-%sol = FEMsolve(fem)
+%FEMsolve solve system of linear equations for the MT problem
+%
+% sol = FEMsolve(fem) computes the numerical solution of the
+% linear systems arising in the 2D MT problem.
+%
+% sol = FEMsolve(fem, 'verbose', true) computes the solution and displays
+% additional timing information.
+%
+% Input:
+% ======
+%
+% fem struct resulting from a call to FEMproblem()
+%
+% Output:
+% =======
+% The struct sol contains the numerical solution (i.e., the degrees of
+% freedom) out of which the MT fields can be computed in the
+% post-processing stage. More precisely, the struct sol has the fields
+%
+% sol.ue for E-polarisation
+% sol.uh for H-polarisation
+%
+% (C) 2020 Ralph-Uwe Börner
 
 p = inputParser;
 addParameter(p, 'verbose', true, @islogical);

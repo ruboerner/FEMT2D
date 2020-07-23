@@ -1,8 +1,35 @@
 function fem = getQ(fem, obs)
-%function fem = getQ(fem, obs)
-
-% dim = fem.dimension;
-% order = fem.order;
+%getQ construct observation operator
+%
+% fem = getQ(fem, obs)
+%
+% getQ() construct the observation operator from which we extract
+% physical fields from the numerical solution.
+%
+% Input:
+% ======
+%
+% fem - fem structure, see FEMproblem()
+% obs - 2 x n array of points [y_1, ..., y_n ; z_1, ..., z_n]
+%
+% Output:
+% =======
+%
+% In the struct fem, the observation operators are stored in the
+% fields fem.Q
+%
+% Example:
+% ========
+%
+% To obtain electric fields E_x for the E-polarization from the
+% E-polarization solution stored in sol.ue, one calls
+%
+% Ex = fem.Q.Qe * sol.ue
+%
+% See FEMproblem(), FEMsolve()
+%
+% (C) 2020 Ralph-Uwe Börner
+%
 
 % Identify elements to which points (x, y) belong ans store their indices
 % in array indEl

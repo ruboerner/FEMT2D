@@ -1,6 +1,18 @@
 function idxDOFS = finddofsinsubdomain(fem, isubdomain)
-%finddofsinsubdomain(fem, isubdomain) find dofs indices associated with a
-%subdomain
+%finddofsinsubdomain() find DOFS associated with a subdomain
+%
+% indexDOFS = finddofsinsubdomain(fem, subdomainnumber)
+%
+% Given a mesh stored in fem.mesh, finddofsinsubdomain() collects all
+% indices of dofs which correspond to a subdomain indicated by
+% subdomainnumber
+%
+% Input:
+% ======
+% fem - fem structure, see FEMproblem()
+% subdomainnumber - number of subdomain for which the DOFS are desired
+%
+% (C) 2020 Ralph-Uwe Börner
 %
 
 ns = unique(fem.mesh.tri2subdomain);

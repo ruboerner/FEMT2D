@@ -1,4 +1,8 @@
 function sol = getFields(fem, sol)
+%getFields Post processing of numerical results
+%
+% (C) 2020 Ralph-Uwe Börner
+%
 
 both = strcmp(fem.polarization, 'both');
 

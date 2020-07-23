@@ -1,5 +1,13 @@
 function fem = getQfull(fem)
-%fem = getQfull(fem)
+%getQfull provide observation operator for the evaluation of solutions
+% across the whole computational domain, e.g., plots of cuurent density
+% etc.
+%
+% fem = getQfull(fem)
+%
+% See also getQ()
+%
+% (C) 2020 Ralph-Uwe Börner
 %
 
 nD = (fem.dimension + 1) + (fem.order - 1) * fem.dimension * (fem.dimension + 1) / 2;

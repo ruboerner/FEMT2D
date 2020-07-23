@@ -1,4 +1,6 @@
 function sol = getPhase(sol)
+%getPhase Compute impedance phase in degrees
+%
 
 if sol.epol
     assert(isfield(sol, 'Zxy'));

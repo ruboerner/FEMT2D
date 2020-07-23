@@ -1,4 +1,6 @@
 function E = getE1dMT(f,rho,d,zi)
+%getE1dMT electric field within and above a layered halfspace
+%
 % E = getE1DMT(F,RHO,D,Z)
 %
 % Compute horizontal electric field E within and above a layered half-space.
@@ -17,12 +19,8 @@ function E = getE1dMT(f,rho,d,zi)
 % E:   NZ vector of complex electric fields at depths Z.
 % Note that E is normalized such that magnetic field H = 1 A/m at z = 0.
 %
-% Ralph-Uwe Boerner (2009)
-
-% Homogeneous Halfspace in Comsol
-% u = 0;
-% rho = [0.01];
-% d = [];
+% (C) Ralph-Uwe Boerner (2009)
+%
 
 assert(nargin == 4, 'getE1DMT requires four input arguments.');
 

@@ -1,5 +1,26 @@
 function fem = removeDirichlet(fem, varargin)
-%fem = removeDirichlet(fem, varargin)
+%removeDirichlet remove Dirichlet values from system of linear equations
+%
+% fem = removeDirichlet(fem, varargin) removes Dirichlet condition from 
+% system of linear equations
+%
+% Input:
+% ======
+%
+% For a given frequency, removeDirichlet() computes electric and/or
+% magnetic fields along the artificial boundaries of the computational
+% domain. The conductivity structure is assumed to be a layered halfspace.
+% However, the layers at both left and right boundaries may differ from
+% each other.
+%
+% | 'sigmaBC', 'sigmaBCL', 'sigmaBCR' | conductivities in S/m at both, 
+% |                                   | left or right boundaries
+% | 'thicknessBC', thicknessBCL',     | layer thicknesses in m
+% | 'thicknessBCR'                    |
+% | 'frequency'                       | frequency in Hz
+%
+% (C) 2020 Ralph-Uwe Börner
+%
 
 p = inputParser;
 

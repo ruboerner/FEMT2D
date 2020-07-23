@@ -1,4 +1,6 @@
 function sol = getRhoa(fem, sol)
+%getRhoa Compute apparent resistivities for both polarizations
+%
 
 omega = 2 * pi * fem.app.frequency;
 mu0 = pi * 4e-7;

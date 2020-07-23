@@ -1,7 +1,14 @@
 function msh = getMesh(varargin)
-%getMesh(varargin) read mesh file
-% mesh = getMesh('filename', 'test.1', 'format', 'triangle');
+%getMesh read in a mesh file
 %
+% mesh = getMesh('filename', 'test.1', 'format', 'triangle')
+%
+% getMesh reads mesh information provided by a mesh generator.
+% Currently, only Triangle is supported.
+%
+% (C) 2020 Ralph-Uwe Börner
+%
+
 p = inputParser;
 
 addParameter(p, 'filename', '', @ischar);

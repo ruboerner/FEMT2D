@@ -1,4 +1,8 @@
 function plotMT(varargin)
+%plotMT Plot profiles, sections, or sounding curves
+%
+% (C) 2020 Ralph-Uwe Börner
+%
 
 p = inputParser();
 
