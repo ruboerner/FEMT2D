@@ -11,7 +11,7 @@ Besides a basic MATLAB installation, a mesh generator is required for setting up
 
 To make the creation of 2-D triangular meshes more user-friendly, the installation of [PyGIMLi](http://www.pygimli.org) is strongly recommended.
 
-`FEMT2D` has been tested with MATLAB R2020a. Earlier releases work well also. 
+`FEMT2D` has been tested with MATLAB R2020a. Earlier releases work well also. Also note that compatibility with [Octave](http://www.octave.org) has not been tested.
 
 To activate rendering of $\LaTeX$ expressions within this `README.md`, download and activate this [Chrome extension](https://chrome.google.com/webstore/detail/mathjax-plugin-for-github/ioemnmodlmafdkllaclgeombjnmnbima).
 
